@@ -100,7 +100,7 @@
             // calls for streaming.
             // So we'll set up this timeout and if nothing happens after a while, we'll
             // conclude that there's no actual getUserMedia support.
-            noGUMSupportTimeout = setTimeout(onNoGUMSupport, 10000);
+            noGUMSupportTimeout = setTimeout(onNoGUMSupport.bind(errorCallback, okCallback), 10000);
 
             startStreaming(errorCallback, function() {
                     
@@ -121,12 +121,12 @@
             );
 
         } else {
-
+            
             onNoGUMSupport();
         }
 
         function onNoGUMSupport() {
-            errorCallback('Native device media streaming (getUserMedia) not supported in this browser.');
+            document.getElementById('retry').onclick = startVideoStreaming.bind(errorCallback, okCallback); 
         }
     }
 
@@ -138,7 +138,6 @@
             cameraStream.stop();
 
         }
-
         if(video) {
 
             video.pause();
