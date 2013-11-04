@@ -122,10 +122,10 @@
 
         } else {
             
-            onNoGUMSupport();
+            onNoGUMSupport(errorCallback, okCallback);
         }
 
-        function onNoGUMSupport() {
+        function onNoGUMSupport(errorCallback, okCallback) {
             document.getElementById('retry').onclick = startVideoStreaming.bind(errorCallback, okCallback); 
         }
     }
